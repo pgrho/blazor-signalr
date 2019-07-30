@@ -11,7 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shipwreck.BlazorSignalR.DemoServer", "Shipwreck.BlazorSignalR.DemoServer\Shipwreck.BlazorSignalR.DemoServer.csproj", "{D1C106E2-E220-4C8C-8FF6-28B51A0EECEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shipwreck.BlazorSignalR.DemoModels", "Shipwreck.BlazorSignalR.DemoModels\Shipwreck.BlazorSignalR.DemoModels.csproj", "{C1DF11C8-DB1C-457A-8417-9467480B1FC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shipwreck.BlazorSignalR.DemoModels", "Shipwreck.BlazorSignalR.DemoModels\Shipwreck.BlazorSignalR.DemoModels.csproj", "{C1DF11C8-DB1C-457A-8417-9467480B1FC9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shipwreck.BlazorSignalR", "Shipwreck.BlazorSignalR\Shipwreck.BlazorSignalR.csproj", "{EAE904B9-A5E9-48B0-8210-617255E3C757}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shipwreck.BlazorSignalR.DemoClient", "Shipwreck.BlazorSignalR.DemoClient\Shipwreck.BlazorSignalR.DemoClient.csproj", "{6A92AB86-4035-42D1-B21A-C9C0E8149751}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,30 @@ Global
 		{C1DF11C8-DB1C-457A-8417-9467480B1FC9}.Release|x64.Build.0 = Release|Any CPU
 		{C1DF11C8-DB1C-457A-8417-9467480B1FC9}.Release|x86.ActiveCfg = Release|Any CPU
 		{C1DF11C8-DB1C-457A-8417-9467480B1FC9}.Release|x86.Build.0 = Release|Any CPU
+		{EAE904B9-A5E9-48B0-8210-617255E3C757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAE904B9-A5E9-48B0-8210-617255E3C757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAE904B9-A5E9-48B0-8210-617255E3C757}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EAE904B9-A5E9-48B0-8210-617255E3C757}.Debug|x64.Build.0 = Debug|Any CPU
+		{EAE904B9-A5E9-48B0-8210-617255E3C757}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EAE904B9-A5E9-48B0-8210-617255E3C757}.Debug|x86.Build.0 = Debug|Any CPU
+		{EAE904B9-A5E9-48B0-8210-617255E3C757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAE904B9-A5E9-48B0-8210-617255E3C757}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAE904B9-A5E9-48B0-8210-617255E3C757}.Release|x64.ActiveCfg = Release|Any CPU
+		{EAE904B9-A5E9-48B0-8210-617255E3C757}.Release|x64.Build.0 = Release|Any CPU
+		{EAE904B9-A5E9-48B0-8210-617255E3C757}.Release|x86.ActiveCfg = Release|Any CPU
+		{EAE904B9-A5E9-48B0-8210-617255E3C757}.Release|x86.Build.0 = Release|Any CPU
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751}.Debug|x64.Build.0 = Debug|Any CPU
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751}.Debug|x86.Build.0 = Debug|Any CPU
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751}.Release|x64.ActiveCfg = Release|Any CPU
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751}.Release|x64.Build.0 = Release|Any CPU
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751}.Release|x86.ActiveCfg = Release|Any CPU
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
