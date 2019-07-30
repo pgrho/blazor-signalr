@@ -23,7 +23,9 @@ b1.click(async function () {
     try {
         connection = $.hubConnection();
         proxy = connection.createHubProxy('pingpong');
+        proxy.on('Connected', (c) => __append(`${c} Connected`));
         proxy.on('Pong', (c, t) => __append(`Pong from [${c}]@[${t}]`));
+        proxy.on('Disconnected', (args) => __append(`${args.ConnectionId} Disconnected(${args.StopCalled})@${args.Timestamp}`));
         __append('Starting..');
         await connection.start();
         __append('Started..');

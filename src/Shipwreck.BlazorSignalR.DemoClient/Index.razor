@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using Shipwreck.BlazorSignalR
+@using Shipwreck.BlazorSignalR.DemoModels
 
 <div>
     <button type="button" @onclick="@Connect">
@@ -13,6 +14,10 @@
     <button type="button"
             @onclick="@Ping">
         Ping
+    </button>
+    <button type="button"
+            @onclick="@Calculate">
+        Calc
     </button>
 </div>
 <textarea @bind="log"
@@ -46,8 +51,10 @@
                 Url = "http://localhost:61705/signalr",
             };
             _Proxy = _Connection.CreateHubProxy("pingpong");
+            _Proxy.On("Connected", (string cid) => Append(cid + " Connected"));
             _Proxy.On("Pong", (string clientName, DateTimeOffset timestamp)
                 => Append($"Pong from [{clientName}]@[{timestamp}]"));
+            _Proxy.On("Disconnected", (DisconnectedArgs args) => Append($"{args.ConnectionId } Disconnected({args.StopCalled})@{args.Timestamp}"));
             Append("Starting..");
             await _Connection.Start();
             Append("Started");
@@ -88,6 +95,23 @@
                 Append("Pinging..");
                 var r = await p.Invoke<int>("Ping", clientName, count);
                 Append("Ping completed: " + r);
+            }
+        }
+        catch (Exception ex)
+        {
+            Append("Exception caught: " + ex);
+        }
+    }
+    async Task Calculate()
+    {
+        try
+        {
+            var p = _Proxy;
+            if (p != null)
+            {
+                Append("Calculating..");
+                var r = await p.Invoke<CalculateResult>("Calculate", new CalculateArgs() { ClientName = clientName, Count = count });
+                Append("Calculated: " + r.Value);
             }
         }
         catch (Exception ex)

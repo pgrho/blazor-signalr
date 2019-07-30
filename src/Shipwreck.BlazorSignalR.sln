@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shipwreck.BlazorSignalR.Dem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shipwreck.BlazorSignalR", "Shipwreck.BlazorSignalR\Shipwreck.BlazorSignalR.csproj", "{EAE904B9-A5E9-48B0-8210-617255E3C757}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shipwreck.BlazorSignalR.DemoClient", "Shipwreck.BlazorSignalR.DemoClient\Shipwreck.BlazorSignalR.DemoClient.csproj", "{6A92AB86-4035-42D1-B21A-C9C0E8149751}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shipwreck.BlazorSignalR.DemoClient", "Shipwreck.BlazorSignalR.DemoClient\Shipwreck.BlazorSignalR.DemoClient.csproj", "{6A92AB86-4035-42D1-B21A-C9C0E8149751}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{D51E4556-40BA-40B0-BD3C-8CD84951CFC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +80,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D1C106E2-E220-4C8C-8FF6-28B51A0EECEE} = {D51E4556-40BA-40B0-BD3C-8CD84951CFC1}
+		{C1DF11C8-DB1C-457A-8417-9467480B1FC9} = {D51E4556-40BA-40B0-BD3C-8CD84951CFC1}
+		{6A92AB86-4035-42D1-B21A-C9C0E8149751} = {D51E4556-40BA-40B0-BD3C-8CD84951CFC1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {983608B0-72C4-4558-B7CD-E1EAB8251044}

@@ -59,7 +59,9 @@ b1.click(function () {
                     _a.trys.push([0, 2, , 3]);
                     connection = $.hubConnection();
                     proxy = connection.createHubProxy('pingpong');
+                    proxy.on('Connected', function (c) { return __append(c + " Connected"); });
                     proxy.on('Pong', function (c, t) { return __append("Pong from [" + c + "]@[" + t + "]"); });
+                    proxy.on('Disconnected', function (args) { return __append(args.ConnectionId + " Disconnected(" + args.StopCalled + ")@" + args.Timestamp); });
                     __append('Starting..');
                     return [4 /*yield*/, connection.start()];
                 case 1:

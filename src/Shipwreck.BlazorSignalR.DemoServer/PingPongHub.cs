@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
@@ -22,6 +23,34 @@ namespace Shipwreck.BlazorSignalR.DemoServer
                 await Task.Delay(1000).ConfigureAwait(false);
             }
             return GetHashCode();
+        }
+
+        public async Task<CalculateResult> Calculate(CalculateArgs a)
+        {
+            await Task.Delay(1000);
+            return new CalculateResult()
+            {
+                Value = string.Concat(Enumerable.Repeat(a.ClientName, a.Count))
+            };
+        }
+
+        public override async Task OnConnected()
+        {
+            var cid = Context.ConnectionId;
+            await base.OnConnected();
+            Clients.All.Connected(cid);
+        }
+
+        public override async Task OnDisconnected(bool stopCalled)
+        {
+            var cid = Context.ConnectionId;
+            await base.OnDisconnected(stopCalled);
+            Clients.All.Disconnected(new DisconnectedArgs()
+            {
+                ConnectionId = cid,
+                StopCalled = stopCalled,
+                Timestamp = DateTimeOffset.Now
+            });
         }
     }
 }

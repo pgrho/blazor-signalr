@@ -11,6 +11,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Blazor.DevServer" Version="3.0.0-preview7.19365.7" PrivateAssets="all" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Shipwreck.BlazorSignalR.DemoModels\Shipwreck.BlazorSignalR.DemoModels.csproj" />
     <ProjectReference Include="..\Shipwreck.BlazorSignalR\Shipwreck.BlazorSignalR.csproj" />
   </ItemGroup>
 
