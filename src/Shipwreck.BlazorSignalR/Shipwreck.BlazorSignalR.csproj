@@ -10,6 +10,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/pgrho/blazor-signalr</PackageProjectUrl>
     <Description>ASP.NET SignalR connector for Blazor 3.0.0</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,18 +18,6 @@
     <EmbeddedResource Include="content\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="content\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Scripts\jquery.signalR-2.4.1.js" />
-    <None Remove="Scripts\jquery.signalR-2.4.1.min.js" />
-    <None Remove="Scripts\typings\jquery\jquery.d.ts" />
-    <None Remove="Scripts\typings\signalr\signalr.d.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Scripts\jquery.signalR-2.4.1.js" />
-    <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,7 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="content\" />
+    <Content Remove="*.json" />
+    <Content Remove="Scripts\**\*.js" />
+    <Content Remove="Scripts\**\*.js.map" />
   </ItemGroup>
 
 </Project>

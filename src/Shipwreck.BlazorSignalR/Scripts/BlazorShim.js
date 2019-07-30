@@ -1,6 +1,3 @@
-/// <reference path="typings/jquery/jquery.d.ts" />
-/// <reference path="typings/signalr/signalr.d.ts" />
-/// <reference path="typings/Blazor.d.ts" />
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -43,6 +40,10 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
             r[k] = a[j];
     return r;
 };
+/// <reference path="typings/jquery/jquery.d.ts" />
+/// <reference path="typings/signalr/signalr.d.ts" />
+/// <reference path="typings/Blazor.d.ts" />
+/// <reference path="typings/es6-promise/es6-promise.d.ts" />
 (function () {
     var Instance = /** @class */ (function () {
         function Instance(hashCode, args) {
