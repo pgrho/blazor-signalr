@@ -1,8 +1,8 @@
-﻿var gulp = require("gulp");
+﻿/// <binding AfterBuild='default' Clean='clean' />
+var gulp = require("gulp");
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var del = require('del');
-
 
 gulp.task('clean', function () {
     return del(['content/*.js']);

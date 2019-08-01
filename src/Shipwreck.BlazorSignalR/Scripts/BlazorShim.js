@@ -45,6 +45,12 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 /// <reference path="typings/Blazor.d.ts" />
 /// <reference path="typings/es6-promise/es6-promise.d.ts" />
 (function () {
+    var __trace = function (message) {
+        var o = window.shipwreckBlazorSignalR;
+        if (o && o.traceEnabled) {
+            console.trace(message);
+        }
+    };
     var Instance = /** @class */ (function () {
         function Instance(hashCode, args) {
             var _this = this;
@@ -54,22 +60,40 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
                 logging: args.Logging,
                 useDefaultPath: args.UseDefaultPath
             });
-            c.connectionSlow(function () { return DotNet.invokeMethodAsync('Shipwreck.BlazorSignalR', 'OnSignalRConnectionSlow', _this.hashCode); });
-            c.disconnected(function () { return DotNet.invokeMethodAsync('Shipwreck.BlazorSignalR', 'OnSignalRDisconnected', _this.hashCode); });
-            c.error(function (e) { return DotNet.invokeMethodAsync('Shipwreck.BlazorSignalR', 'OnSignalRError', _this.hashCode, JSON.stringify({
-                readyState: e.context ? e.context.readyState : null,
-                responseText: e.context ? e.context.responseText : null,
-                status: e.context ? e.context.status : null,
-                statusText: e.context ? e.context.statusText : null,
-                message: e.message,
-                name: e.name,
-                source: e.source,
-                stack: e.stack,
-                transport: e.transport,
-            })); });
-            c.reconnected(function () { return DotNet.invokeMethodAsync('Shipwreck.BlazorSignalR', 'OnSignalRReconnected', _this.hashCode); });
-            c.reconnecting(function () { return DotNet.invokeMethodAsync('Shipwreck.BlazorSignalR', 'OnSignalRReconnecting', _this.hashCode); });
-            c.stateChanged(function (e) { return DotNet.invokeMethodAsync('Shipwreck.BlazorSignalR', 'OnSignalRStateChanged', _this.hashCode, e.oldState, e.newState); });
+            c.connectionSlow(function () {
+                __trace("shipwreckBlazorSignalR.__connectionSlow(" + hashCode + ")");
+                DotNet.invokeMethodAsync('Shipwreck.BlazorSignalR', 'OnSignalRConnectionSlow', _this.hashCode);
+            });
+            c.disconnected(function () {
+                __trace("shipwreckBlazorSignalR.__disconnected(" + hashCode + ")");
+                DotNet.invokeMethodAsync('Shipwreck.BlazorSignalR', 'OnSignalRDisconnected', _this.hashCode);
+            });
+            c.error(function (e) {
+                __trace("shipwreckBlazorSignalR.__error(" + hashCode + ")");
+                DotNet.invokeMethodAsync('Shipwreck.BlazorSignalR', 'OnSignalRError', _this.hashCode, JSON.stringify({
+                    readyState: e.context ? e.context.readyState : null,
+                    responseText: e.context ? e.context.responseText : null,
+                    status: e.context ? e.context.status : null,
+                    statusText: e.context ? e.context.statusText : null,
+                    message: e.message,
+                    name: e.name,
+                    source: e.source,
+                    stack: e.stack,
+                    transport: e.transport,
+                }));
+            });
+            c.reconnected(function () {
+                __trace("shipwreckBlazorSignalR.__reconnected(" + hashCode + ")");
+                DotNet.invokeMethodAsync('Shipwreck.BlazorSignalR', 'OnSignalRReconnected', _this.hashCode);
+            });
+            c.reconnecting(function () {
+                __trace("shipwreckBlazorSignalR.__reconnecting(" + hashCode + ")");
+                DotNet.invokeMethodAsync('Shipwreck.BlazorSignalR', 'OnSignalRReconnecting', _this.hashCode);
+            });
+            c.stateChanged(function (e) {
+                __trace("shipwreckBlazorSignalR.__stateChanged(" + hashCode + ", " + e.oldState + ", " + e.newState + ")");
+                DotNet.invokeMethodAsync('Shipwreck.BlazorSignalR', 'OnSignalRStateChanged', _this.hashCode, e.oldState, e.newState);
+            });
             this._proxies = {};
             var _self = this;
             for (var _i = 0, _a = args.Hubs; _i < _a.length; _i++) {
@@ -84,6 +108,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
                                 for (var i = 0; i < c.Length; i++) {
                                     args[i] = arguments[i];
                                 }
+                                __trace("shipwreckBlazorSignalR.__on(" + hashCode + ", " + h.Name + ", " + c.Name + ")");
                                 _self._on(h.Name, c.Name, args);
                             };
                         })(h, c_1));
@@ -157,16 +182,19 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     }());
     var instances = {};
     var __start = function (hashCode, argsJson) {
+        __trace("shipwreckBlazorSignalR.start(" + hashCode + ")");
         var i = instances[hashCode] = new Instance(hashCode, JSON.parse(argsJson));
         return i.start();
     };
     var __invoke = function (hashCode, hub, method, argsJson) {
+        __trace("shipwreckBlazorSignalR.invoke(" + hashCode + ", " + hub + ", " + method + ", " + argsJson + ")");
         var i = instances[hashCode];
         if (i) {
             return i.invoke(hub, method, argsJson ? JSON.parse(argsJson) : []);
         }
     };
     var __stop = function (hashCode) {
+        __trace("shipwreckBlazorSignalR.stop(" + hashCode + ")");
         var i = instances[hashCode];
         if (i) {
             delete instances[hashCode];
@@ -177,6 +205,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
         start: __start,
         invoke: __invoke,
         stop: __stop,
+        traceEnabled: false
     };
 })();
 //# sourceMappingURL=BlazorShim.js.map

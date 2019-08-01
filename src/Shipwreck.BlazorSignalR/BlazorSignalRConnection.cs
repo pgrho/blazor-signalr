@@ -95,8 +95,16 @@ namespace Shipwreck.BlazorSignalR
         //     Occurs when the Microsoft.AspNet.SignalR.Client.Connection state changes.
         public event Action<StateChange> StateChanged;
 
+        public static event Action<string> LogDebug;
+
+        public static event Action<string> LogError;
+
         public BlazorSignalRHubProxy CreateHubProxy(string hubName)
         {
+            if (_State != ConnectionState.Disconnected)
+            {
+                throw new InvalidOperationException();
+            }
             if (!_Proxies.TryGetValue(hubName, out var p))
             {
                 _Proxies[hubName] = p = new BlazorSignalRHubProxy(this, hubName);
@@ -108,7 +116,7 @@ namespace Shipwreck.BlazorSignalR
         {
             try
             {
-                Debug.WriteLine($"Starting SignalR connection: {GetHashCode()}");
+                WriteDebug($"Starting SignalR connection: {GetHashCode()}");
 
                 if (_Instances.ContainsKey(GetHashCode()))
                 {
@@ -131,12 +139,12 @@ namespace Shipwreck.BlazorSignalR
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"An Exception caught while Starting SignalR connection: {GetHashCode()}: {ex}");
+                WriteError($"An Exception caught while Starting SignalR connection: {GetHashCode()}: {ex}");
                 throw;
             }
             finally
             {
-                Debug.WriteLine($"Finished Starting SignalR connection: {GetHashCode()}");
+                WriteDebug($"Finished Starting SignalR connection: {GetHashCode()}");
             }
         }
 
@@ -144,7 +152,7 @@ namespace Shipwreck.BlazorSignalR
         {
             try
             {
-                Debug.WriteLine($"Stopping SignalR connection: {GetHashCode()}");
+                WriteDebug($"Stopping SignalR connection: {GetHashCode()}");
 
                 if (_Instances.ContainsKey(GetHashCode()))
                 {
@@ -158,7 +166,7 @@ namespace Shipwreck.BlazorSignalR
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"An Exception caught while Stopping SignalR connection: {GetHashCode()}: {ex}");
+                WriteError($"An Exception caught while Stopping SignalR connection: {GetHashCode()}: {ex}");
                 throw;
             }
             finally
@@ -172,70 +180,98 @@ namespace Shipwreck.BlazorSignalR
         [JSInvokable]
         public static void OnSignalREvent(int hashCode, string hubName, string eventName, string argsArray)
         {
-            Debug.WriteLine($"OnSignalREvent({hashCode}, {hubName}, {eventName}, {argsArray})");
+            WriteDebug($"OnSignalREvent({hashCode}, {hubName}, {eventName}, {argsArray})");
             if (_Instances.TryGetValue(hashCode, out var i))
             {
                 i.OnEvent(hubName, eventName, argsArray);
+            }
+            else
+            {
+                WriteError($"BlazorSignalRConnection not found: {hashCode}");
             }
         }
 
         [JSInvokable]
         public static void OnSignalRConnectionSlow(int hashCode)
         {
-            Debug.WriteLine($"OnSignalRConnectionSlow({hashCode})");
+            WriteDebug($"OnSignalRConnectionSlow({hashCode})");
             if (_Instances.TryGetValue(hashCode, out var i))
             {
                 i.ConnectionSlow?.Invoke();
+            }
+            else
+            {
+                WriteError($"BlazorSignalRConnection not found: {hashCode}");
             }
         }
 
         [JSInvokable]
         public static void OnSignalRDisconnected(int hashCode)
         {
-            Debug.WriteLine($"OnSignalRDisconnected({hashCode})");
+            WriteDebug($"OnSignalRDisconnected({hashCode})");
             if (_Instances.TryGetValue(hashCode, out var i))
             {
                 i.State = ConnectionState.Disconnected;
+            }
+            else
+            {
+                WriteError($"BlazorSignalRConnection not found: {hashCode}");
             }
         }
 
         [JSInvokable]
         public static void OnSignalRReconnected(int hashCode)
         {
-            Debug.WriteLine($"OnSignalRReconnected({hashCode})");
+            WriteDebug($"OnSignalRReconnected({hashCode})");
             if (_Instances.TryGetValue(hashCode, out var i))
             {
                 i.State = ConnectionState.Connected;
+            }
+            else
+            {
+                WriteError($"BlazorSignalRConnection not found: {hashCode}");
             }
         }
 
         [JSInvokable]
         public static void OnSignalRReconnecting(int hashCode)
         {
-            Debug.WriteLine($"OnSignalRReconnecting({hashCode})");
+            WriteDebug($"OnSignalRReconnecting({hashCode})");
             if (_Instances.TryGetValue(hashCode, out var i))
             {
                 i.State = ConnectionState.Reconnecting;
+            }
+            else
+            {
+                WriteError($"BlazorSignalRConnection not found: {hashCode}");
             }
         }
 
         [JSInvokable]
         public static void OnSignalRStateChanged(int hashCode, int oldState, int newState)
         {
-            Debug.WriteLine($"OnSignalRStateChanged({hashCode}, {oldState}, {newState})");
+            WriteDebug($"OnSignalRStateChanged({hashCode}, {oldState}, {newState})");
             if (_Instances.TryGetValue(hashCode, out var i))
             {
                 i.State = (ConnectionState)newState;
+            }
+            else
+            {
+                WriteError($"BlazorSignalRConnection not found: {hashCode}");
             }
         }
 
         [JSInvokable]
         public static void OnSignalRError(int hashCode, string args)
         {
-            Debug.WriteLine($"OnSignalRError({hashCode}, {args})");
+            WriteError($"OnSignalRError({hashCode}, {args})");
             if (_Instances.TryGetValue(hashCode, out var i))
             {
                 i.Error?.Invoke(new BlazorSignalRException(JObject.Parse(args)));
+            }
+            else
+            {
+                WriteError($"BlazorSignalRConnection not found: {hashCode}");
             }
         }
 
@@ -246,6 +282,10 @@ namespace Shipwreck.BlazorSignalR
             if (_Proxies.TryGetValue(hubName, out var h))
             {
                 h?.OnEvent(eventName, argsArray);
+            }
+            else
+            {
+                WriteError($"Hub not found: {hubName}");
             }
         }
 
@@ -259,5 +299,17 @@ namespace Shipwreck.BlazorSignalR
             => Dispose(false);
 
         private void Dispose(bool disposing) => Stop().GetHashCode();
+
+        internal static void WriteDebug(string message)
+        {
+            Debug.WriteLine(message);
+            LogDebug?.Invoke(message);
+        }
+
+        internal static void WriteError(string message)
+        {
+            Console.WriteLine(message);
+            LogError?.Invoke(message);
+        }
     }
 }

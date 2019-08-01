@@ -31,9 +31,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="*.json" />
-    <Content Remove="Scripts\**\*.js" />
-    <Content Remove="Scripts\**\*.js.map" />
+    <Content Remove="*.json" /> 
+    <Content Remove="Scripts\BlazorShim.js" Pack="False" />
+    <Content Remove="Scripts\BlazorShim.js.map" Pack="False" />
+    <Content Remove="Properties\launchSettings.json" />
+    <Content Include="Properties\launchSettings.json" Pack="False" />
   </ItemGroup>
 
 </Project>

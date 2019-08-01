@@ -108,14 +108,13 @@ namespace Shipwreck.BlazorSignalR
         {
             try
             {
-                Debug.WriteLine($"Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}");
+                BlazorSignalRConnection.WriteDebug($"Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}");
                 await _Connection.JS.InvokeAsync<string>("window.shipwreckBlazorSignalR.invoke", GetHashCode(), _Connection.GetHashCode(), _HubName, method, JsonConvert.SerializeObject(args));
-
-                Debug.WriteLine($"Finished Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}");
+                BlazorSignalRConnection.WriteDebug($"Finished Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"An Exception caught while Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}: {ex}");
+                BlazorSignalRConnection.WriteError($"An Exception caught while Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}: {ex}");
                 throw;
             }
         }
@@ -124,17 +123,17 @@ namespace Shipwreck.BlazorSignalR
         {
             try
             {
-                Debug.WriteLine($"Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}");
+                BlazorSignalRConnection.WriteDebug($"Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}");
 
                 var result = await _Connection.JS.InvokeAsync<string>(
                     "window.shipwreckBlazorSignalR.invoke",
                     _Connection.GetHashCode(), _HubName, method, JsonConvert.SerializeObject(args));
-                Debug.WriteLine($"Finished Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}: {result}");
+                BlazorSignalRConnection.WriteDebug($"Finished Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}: {result}");
                 return string.IsNullOrEmpty(result) ? default : JsonConvert.DeserializeObject<T>(result);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"An Exception caught while Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}: {ex}");
+                BlazorSignalRConnection.WriteError($"An Exception caught while Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}: {ex}");
                 throw;
             }
         }
@@ -145,6 +144,10 @@ namespace Shipwreck.BlazorSignalR
             if (_Handlers.TryGetValue((eventName, a.Count), out var h))
             {
                 h(a);
+            }
+            else
+            {
+                BlazorSignalRConnection.WriteError($"Handler not found: {eventName} {argsArray}");
             }
         }
     }
