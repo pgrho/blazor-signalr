@@ -109,7 +109,7 @@ namespace Shipwreck.BlazorSignalR
             try
             {
                 BlazorSignalRConnection.WriteDebug($"Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}");
-                await _Connection.JS.InvokeAsync<string>("window.shipwreckBlazorSignalR.invoke", GetHashCode(), _Connection.GetHashCode(), _HubName, method, JsonConvert.SerializeObject(args));
+                await _Connection.JS.InvokeAsync<string>("window.shipwreckBlazorSignalR.invoke", _Connection.GetHashCode(), _HubName, method, JsonConvert.SerializeObject(args));
                 BlazorSignalRConnection.WriteDebug($"Finished Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}");
             }
             catch (Exception ex)

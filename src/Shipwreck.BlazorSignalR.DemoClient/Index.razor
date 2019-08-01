@@ -16,6 +16,10 @@
         Ping
     </button>
     <button type="button"
+            @onclick="@PingVoid">
+        Ping (void)
+    </button>
+    <button type="button"
             @onclick="@Calculate">
         Calc
     </button>
@@ -95,6 +99,23 @@
                 Append("Pinging..");
                 var r = await p.Invoke<int>("Ping", clientName, count);
                 Append("Ping completed: " + r);
+            }
+        }
+        catch (Exception ex)
+        {
+            Append("Exception caught: " + ex);
+        }
+    }
+    async Task PingVoid()
+    {
+        try
+        {
+            var p = _Proxy;
+            if (p != null)
+            {
+                Append("Pinging..");
+                await p.Invoke("Ping", clientName, count);
+                Append("Ping completed");
             }
         }
         catch (Exception ex)
