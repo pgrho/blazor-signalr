@@ -23,18 +23,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview7.19365.7" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview7.19365.7" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.6.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="*.json" /> 
-    <Content Remove="Scripts\BlazorShim.js" Pack="False" />
-    <Content Remove="Scripts\BlazorShim.js.map" Pack="False" />
+    <Content Remove="*.json" />
     <Content Remove="Properties\launchSettings.json" />
+    <Content Include="package.json" Pack="False" />
     <Content Include="Properties\launchSettings.json" Pack="False" />
   </ItemGroup>
 

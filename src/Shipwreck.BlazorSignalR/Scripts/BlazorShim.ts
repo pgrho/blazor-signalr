@@ -1,4 +1,8 @@
-﻿/// <reference path="typings/jquery/jquery.d.ts" />
+﻿/*!
+ * Shipwreck.BlazorSignalR
+ * (c) 2019 shipwreck.jp
+ */
+/// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/signalr/signalr.d.ts" />
 /// <reference path="typings/Blazor.d.ts" />
 /// <reference path="typings/es6-promise/es6-promise.d.ts" />
