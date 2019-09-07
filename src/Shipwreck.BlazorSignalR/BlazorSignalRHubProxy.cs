@@ -109,7 +109,9 @@ namespace Shipwreck.BlazorSignalR
             try
             {
                 BlazorSignalRConnection.WriteDebug($"Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}");
-                await _Connection.JS.InvokeAsync<string>("window.shipwreckBlazorSignalR.invoke", _Connection.GetHashCode(), _HubName, method, JsonConvert.SerializeObject(args));
+                await _Connection.JS.InvokeAsync<string>(
+                        "window.shipwreckBlazorSignalR.invoke",
+                        new object[] { _Connection.GetHashCode(), _HubName, method, JsonConvert.SerializeObject(args) });
                 BlazorSignalRConnection.WriteDebug($"Finished Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}");
             }
             catch (Exception ex)
@@ -127,7 +129,7 @@ namespace Shipwreck.BlazorSignalR
 
                 var result = await _Connection.JS.InvokeAsync<string>(
                     "window.shipwreckBlazorSignalR.invoke",
-                    _Connection.GetHashCode(), _HubName, method, JsonConvert.SerializeObject(args));
+                    new object[] { _Connection.GetHashCode(), _HubName, method, JsonConvert.SerializeObject(args) });
                 BlazorSignalRConnection.WriteDebug($"Finished Invoking method {_HubName}#{method}: {_Connection.GetHashCode()}: {result}");
                 return string.IsNullOrEmpty(result) ? default : JsonConvert.DeserializeObject<T>(result);
             }
