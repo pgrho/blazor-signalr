@@ -3,11 +3,12 @@
   "name": "asp.net",
   "private": true,
   "devDependencies": {
-    "del": "2.2.0",
-    "gulp": "3.9.0",
+    "del": "5.1.0",
+    "gulp": "4.0.2",
     "gulp-concat": "2.6.1",
-    "gulp-uglify": "^3.0.1",
-    "typescript": "3.5.3",
-    "gulp-typescript": "5.0.1"
+    "gulp-uglify": "3.0.2",
+    "typescript": "3.7.2",
+    "gulp-typescript": "5.0.1",
+    "@dotnet/jsinterop": "3.0.0"
   }
 }

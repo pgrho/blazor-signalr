@@ -4,8 +4,7 @@
  */
 /// <reference path="typings/jquery/jquery.d.ts" />
 /// <reference path="typings/signalr/signalr.d.ts" />
-/// <reference path="typings/Blazor.d.ts" />
-/// <reference path="typings/es6-promise/es6-promise.d.ts" />
+/// <reference path="../node_modules/@dotnet/jsinterop/dist/Microsoft.JSInterop.d.ts" />
 (function () {
     const __trace = function (message: string) {
         const o = (<any>window).shipwreckBlazorSignalR;

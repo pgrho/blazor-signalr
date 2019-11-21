@@ -8,7 +8,7 @@ var ts = require('gulp-typescript');
 gulp.task('clean', function () {
     return del(['content/*.js']);
 });
-gulp.task('scripts', ['clean'], function () {
+gulp.task('scripts', function () {
 
     gulp.src(['Scripts/BlazorShim.ts']).pipe(ts({
         outFile: 'BlazorShim.js'
@@ -26,4 +26,4 @@ gulp.task('scripts', ['clean'], function () {
         }))
         .pipe(gulp.dest('content/'));
 });
-gulp.task('default', ['scripts'], function () { });
+gulp.task('default', gulp.series(['clean', 'scripts']));
