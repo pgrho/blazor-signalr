@@ -340,3 +340,5 @@ ASALocalRun/
 healthchecksdb
 /src/Shipwreck.BlazorSignalR/content/bundle.js
 /src/Shipwreck.BlazorSignalR/Scripts/BlazorShim.js
+/src/Shipwreck.BlazorSignalR/wwwroot/bundle.js
+/src/Shipwreck.BlazorSignalR.DemoClient/wwwroot/bundle.js

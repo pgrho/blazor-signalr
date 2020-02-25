@@ -6,13 +6,14 @@ var del = require('del');
 var ts = require('gulp-typescript');
 
 gulp.task('clean', function () {
-    return del(['content/*.js']);
+    return del(['wwwroot/*.js']);
 });
-gulp.task('scripts', function () {
-
-    gulp.src(['Scripts/BlazorShim.ts']).pipe(ts({
+gulp.task('ts', function () {
+    return gulp.src(['Scripts/BlazorShim.ts']).pipe(ts({
         outFile: 'BlazorShim.js'
     })).pipe(gulp.dest('Scripts/'));
+});
+gulp.task('bundle', function () {
 
     return gulp.src([
         'Scripts/jquery.signalR-2.4.1.js',
@@ -24,6 +25,6 @@ gulp.task('scripts', function () {
                 comments: /^!/
             }
         }))
-        .pipe(gulp.dest('content/'));
+        .pipe(gulp.dest('wwwroot/'));
 });
-gulp.task('default', gulp.series(['clean', 'scripts']));
+gulp.task('default', gulp.series(['clean', 'ts', 'bundle']));
