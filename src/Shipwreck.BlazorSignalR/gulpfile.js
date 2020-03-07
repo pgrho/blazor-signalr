@@ -19,7 +19,7 @@ gulp.task('bundle', function () {
         'Scripts/jquery.signalR-2.4.1.js',
         'Scripts/BlazorShim.js'
     ])
-        .pipe(concat('bundle.js'))
+        .pipe(concat('Shipwreck.BlazorSignalR.js'))
         .pipe(uglify({
             output: {
                 comments: /^!/

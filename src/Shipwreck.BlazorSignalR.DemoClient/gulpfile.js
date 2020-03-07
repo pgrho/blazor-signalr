@@ -3,11 +3,11 @@ var gulp = require("gulp");
 var del = require('del');
 
 gulp.task('clean', function () {
-    return del(['wwwroot/bundle.js']);
+    return del(['wwwroot/Shipwreck.BlazorSignalR.js']);
 });
 gulp.task('bundle', function () {
     return gulp.src([
-        '../Shipwreck.BlazorSignalR/wwwroot/bundle.js'
+        '../Shipwreck.BlazorSignalR/wwwroot/Shipwreck.BlazorSignalR.js'
     ]).pipe(gulp.dest('wwwroot/'));
 });
 gulp.task('default', gulp.series(['clean', 'bundle']));

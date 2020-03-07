@@ -6,7 +6,7 @@ ASP.NET SignalR connector for Blazor 3.0.0. (Not for ASP.NET **Core** SignalR)
 
 1. Install it from [NuGet](https://www.nuget.org/packages/Shipwreck.BlazorSignalR).
 2. Add jQuery reference to your HTML.
-3. Reference `bundle.js` inside `Shipwreck.BlazorSignalR` contents.
+3. Reference `Shipwreck.BlazorSignalR.js` inside `Shipwreck.BlazorSignalR` contents.
 4. Use `BlazorSignalRConnection` instead of `Microsoft.AspNet.SignalR.Client.HubConnection`.
 
 ```csharp
