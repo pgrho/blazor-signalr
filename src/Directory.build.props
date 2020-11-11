@@ -1,8 +1,8 @@
 ﻿<Project>
   <PropertyGroup>
-    <Version>0.0.8-preview320-3</Version>
+    <Version>0.1.0</Version>
     <Authors>shipwreck.jp</Authors>
-    <Copyright>Copyright © 2019 shipwreck.jp</Copyright>
+    <Copyright>Copyright © 2019-2020 shipwreck.jp</Copyright>
     <IsDeterministic>true</IsDeterministic>
     <NoWarn>1591;1701;1702</NoWarn>
   </PropertyGroup>
